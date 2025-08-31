@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import kiviBowlImage from './assets/kiviBowl-BCT18YXR.png';
-import chocoBowlImage from './assets/chocoBowl-DarO8_Ji.png';
-import berrieBowlImage from './assets/berrieBowl-BJSdB9Z0.png';
-import pizzaImage from './assets/pizza-Bssz6NdX.png';
-import berriesImage from './assets/35dd126ac9aa72fcdf8133bd6fcce4084523d35b-ykLiiQut.png';
-import kiwiImage from './assets/d3bcfaa4722b8b9ade9aa47898d0282fbaea115e-41Fx0T4N.png';
-import chocolateImage from './assets/26882f62512ab32566450935e038c80c30739dae-DdOyy0Bz.png';
-import cheeseImage from './assets/d4ed2d9133e5dd2bb6c728c0d60abdbbc9057b30-DZL9xVRo.png';
+import kiviBowlImage from './assets/kiviBowl.png';
+import chocoBowlImage from './assets/chocoBowl.png';
+import berrieBowlImage from './assets/berrieBowl.png';
+import pizzaImage from './assets/pizza.png';
+import berriesImage from './assets/35dd126ac9aa72fcdf8133bd6fcce4084523d35b.png';
+import kiwiImage from './assets/d3bcfaa4722b8b9ade9aa47898d0282fbaea115e.png';
+import chocolateImage from './assets/26882f62512ab32566450935e038c80c30739dae.png';
+import cheeseImage from './assets/d4ed2d9133e5dd2bb6c728c0d60abdbbc9057b30.png';
 
 // Define the hover effects
 const handleBerryHover = () => {
