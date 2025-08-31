@@ -5,7 +5,7 @@
       "src": "recipe_app/frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "recipe_app/frontend/build"
       }
     }
   ],
