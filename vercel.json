@@ -2,18 +2,21 @@
   "version": 2,
   "builds": [
     {
-      "src": "api.py",
-      "use": "@vercel/python",
+      "src": "recipe_app/frontend/package.json",
+      "use": "@vercel/static-build",
       "config": {
-        "runtime": "python3.9",
-        "installCommand": "pip install -r requirements.txt"
+        "distDir": "build"
       }
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/recipe_app/backend/main.py"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/api.py"
+      "dest": "/recipe_app/frontend/build/$1"
     }
   ]
 }
