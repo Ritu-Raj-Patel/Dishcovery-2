@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './components/auth/AuthContext';
 import logoImage from './assets/35dd126ac9aa72fcdf8133bd6fcce4084523d35b.png';
 import berriesImage from './assets/d3bcfaa4722b8b9ade9aa47898d0282fbaea115e.png';
 import kiwiImage from './assets/26882f62512ab32566450935e038c80c30739dae.png';
@@ -18,6 +19,7 @@ import pizzaImage from './assets/pizza.png';
 import { searchRecipes, SearchRequest } from "./api";
 
 const SimpleLandingPage: React.FC = () => {
+  const { user, isAuthenticated, logout } = useAuth();
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [newIngredient, setNewIngredient] = useState("");
   const [loading, setLoading] = useState(false);
@@ -68,6 +70,23 @@ const SimpleLandingPage: React.FC = () => {
 
   const handleNavClick = (section: string) => {
     console.log(`${section} clicked`);
+    if (section === 'Profile') {
+      // Profile handling is done via the dropdown
+      return;
+    }
+    if (section === 'Login') {
+      navigate('/login');
+      return;
+    }
+    if (section === 'Pricing') {
+      navigate('/pricing');
+      return;
+    }
+    if (section === 'Home') {
+      navigate('/');
+      return;
+    }
+    // For other sections, we can show an alert or handle as needed
     alert(`Navigating to ${section}`);
   };
 
@@ -142,6 +161,12 @@ const SimpleLandingPage: React.FC = () => {
     ingredientButtons.forEach(button => {
       (button as HTMLElement).style.boxShadow = '0px 15px 25px 0px #B05803';
     });
+    
+    // Change ingredient spans to match the kiwi hover color
+    const ingredientSpans = document.querySelectorAll('div[style*="justify-content: center"] > span');
+    ingredientSpans.forEach(span => {
+      (span as HTMLElement).style.backgroundColor = '#FE912A';
+    });
   };
 
   const handleKiwiLeave = () => {
@@ -212,6 +237,12 @@ const SimpleLandingPage: React.FC = () => {
     ingredientButtons.forEach(button => {
       (button as HTMLElement).style.boxShadow = '0px 15px 25px 0px #5B6519';
     });
+    
+    // Revert ingredient spans to original color
+    const ingredientSpans = document.querySelectorAll('div[style*="justify-content: center"] > span');
+    ingredientSpans.forEach(span => {
+      (span as HTMLElement).style.backgroundColor = '#B1C050';
+    });
   };
 
   const handleChocolateHover = () => {
@@ -273,6 +304,12 @@ const SimpleLandingPage: React.FC = () => {
     ingredientButtons.forEach(button => {
       (button as HTMLElement).style.boxShadow = '0px 15px 25px 0px #542315';
     });
+    
+    // Change ingredient spans to match the chocolate hover color
+    const ingredientSpans = document.querySelectorAll('div[style*="justify-content: center"] > span');
+    ingredientSpans.forEach(span => {
+      (span as HTMLElement).style.backgroundColor = '#8B5C4E';
+    });
   };
 
   const handleChocolateLeave = () => {
@@ -333,6 +370,12 @@ const SimpleLandingPage: React.FC = () => {
     const ingredientButtons = document.querySelectorAll('button[title*="ingredient"]');
     ingredientButtons.forEach(button => {
       (button as HTMLElement).style.boxShadow = '0px 15px 25px 0px #5B6519';
+    });
+    
+    // Revert ingredient spans to original color
+    const ingredientSpans = document.querySelectorAll('div[style*="justify-content: center"] > span');
+    ingredientSpans.forEach(span => {
+      (span as HTMLElement).style.backgroundColor = '#B1C050';
     });
   };
 
@@ -436,11 +479,17 @@ const SimpleLandingPage: React.FC = () => {
       findRecipesBtn.style.boxShadow = '0px 5px 10px 0px #992254';
     }
     
+    // Change ingredient spans to match the berry hover color
+    const ingredientSpans = document.querySelectorAll('div[style*="justify-content: center"] > span');
+    ingredientSpans.forEach(span => {
+      (span as HTMLElement).style.backgroundColor = '#FC9DC4';
+    });
+    
     // Change ingredient spans to match the Find Recipes button color
     setHoveredIngredientButton('berry');
   };
 
-  const handleBerryLeave = () => {
+    const handleBerryLeave = () => {
     console.log("Removing berry hover effects");
     // Revert main background color
     const mainDiv = document.getElementById('main-container');
@@ -552,6 +601,12 @@ const SimpleLandingPage: React.FC = () => {
     }
     
     // Revert ingredient spans to original color
+    const ingredientSpans = document.querySelectorAll('div[style*="justify-content: center"] > span');
+    ingredientSpans.forEach(span => {
+      (span as HTMLElement).style.backgroundColor = '#B1C050';
+    });
+    
+    // Revert ingredient spans to original color
     setHoveredIngredientButton(null);
   };
 
@@ -609,7 +664,7 @@ const SimpleLandingPage: React.FC = () => {
           />
         </div>
 
-        <div style={{ display: 'flex', gap: '50px', marginLeft: 'auto' }}>
+        <div style={{ display: 'flex', gap: '50px', marginLeft: 'auto', alignItems: 'center' }}>
           <button
             id="home-nav-button"
             onClick={() => handleNavClick('Home')}
@@ -628,30 +683,108 @@ const SimpleLandingPage: React.FC = () => {
           >
             Pricing
           </button>
-          <button
-            onClick={() => handleNavClick('Login')}
-            style={{
-              backgroundColor: '#B1C050',
-              height: '52px',
-              borderRadius: '40px',
-              boxShadow: '0px 10px 15px 0px #5B6519',
-              border: 'none',
-              color: 'white',
-              fontSize: '22px',
-              padding: '0 30px',
-              cursor: 'pointer'
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = '#FD62A3';
-              (e.target as HTMLButtonElement).style.boxShadow = '0px 10px 15px 0px #992254';
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = '#B1C050';
-              (e.target as HTMLButtonElement).style.boxShadow = '0px 10px 15px 0px #5B6519';
-            }}
-          >
-            LOGIN
-          </button>
+          
+          {/* Authentication Section */}
+          {isAuthenticated ? (
+            <div style={{ position: 'relative' }}>
+              <button
+                onClick={() => {
+                  const dropdown = document.getElementById('profile-dropdown');
+                  if (dropdown) {
+                    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+                  }
+                }}
+                style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '50%',
+                  backgroundColor: '#B1C050',
+                  border: 'none',
+                  color: 'white',
+                  fontSize: '22px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0px 10px 15px 0px #5B6519'
+                }}
+                onMouseEnter={(e) => {
+                  (e.target as HTMLButtonElement).style.backgroundColor = '#FD62A3';
+                  (e.target as HTMLButtonElement).style.boxShadow = '0px 10px 15px 0px #992254';
+                }}
+                onMouseLeave={(e) => {
+                  (e.target as HTMLButtonElement).style.backgroundColor = '#B1C050';
+                  (e.target as HTMLButtonElement).style.boxShadow = '0px 10px 15px 0px #5B6519';
+                }}
+              >
+                {user?.name?.charAt(0) || 'U'}
+              </button>
+              <div 
+                style={{
+                  position: 'absolute',
+                  top: '60px',
+                  right: '0',
+                  backgroundColor: 'white',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  padding: '16px',
+                  minWidth: '200px',
+                  display: 'none',
+                  zIndex: 100
+                }}
+                id="profile-dropdown"
+              >
+                <div style={{ marginBottom: '12px' }}>
+                  <p style={{ fontWeight: 'bold', margin: '0' }}>{user?.name}</p>
+                  <p style={{ fontSize: '14px', color: '#666', margin: '0' }}>{user?.email}</p>
+                </div>
+                <button
+                  onClick={() => {
+                    logout();
+                    const dropdown = document.getElementById('profile-dropdown');
+                    if (dropdown) dropdown.style.display = 'none';
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '8px 12px',
+                    backgroundColor: '#B1C050',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    marginTop: '8px'
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={() => navigate('/login')}
+              style={{
+                backgroundColor: '#B1C050',
+                height: '52px',
+                borderRadius: '40px',
+                boxShadow: '0px 10px 15px 0px #5B6519',
+                border: 'none',
+                color: 'white',
+                fontSize: '22px',
+                padding: '0 30px',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                (e.target as HTMLButtonElement).style.backgroundColor = '#FD62A3';
+                (e.target as HTMLButtonElement).style.boxShadow = '0px 10px 15px 0px #992254';
+              }}
+              onMouseLeave={(e) => {
+                (e.target as HTMLButtonElement).style.backgroundColor = '#B1C050';
+                (e.target as HTMLButtonElement).style.boxShadow = '0px 10px 15px 0px #5B6519';
+              }}
+            >
+              LOGIN
+            </button>
+          )}
         </div>
       </nav>
 
@@ -1482,6 +1615,41 @@ const SimpleLandingPage: React.FC = () => {
             />
           </div>
         </div>
+      </div>
+      
+      {/* Scroll Over Instruction */}
+      <div style={{
+        position: 'absolute',
+        bottom: '350px',
+        left: '5px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '8px',
+        zIndex: 10,
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        padding: '7px 13px',
+        borderRadius: '17px',
+        boxShadow: '0px 5px 13px rgba(0, 0, 0, 0.1)'
+      }}>
+        <span style={{
+          fontSize: '13px',
+          fontWeight: 'bold',
+          color: '#333'
+        }}>
+          SCROLL OVER
+        </span>
+        <svg 
+          width="20" 
+          height="20" 
+          viewBox="0 0 24 24" 
+          style={{ transform: 'rotate(45deg)' }}
+        >
+          <path 
+            d="M7 14l5-5 5 5z" 
+            fill="#B1C050"
+          />
+        </svg>
       </div>
     </div>
   );
