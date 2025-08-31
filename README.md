@@ -12,18 +12,30 @@ A smart recipe recommendation system that uses AI to extract ingredients from im
 
 ## Tech Stack
 
-- Frontend: Next.js with TypeScript and Tailwind CSS
+- Frontend: React/Vite with TypeScript and Tailwind CSS
 - Backend: FastAPI with Python
 - AI: Google Gemini for ingredient recognition
 
-## Getting Started
+## Deployment
 
-Instructions to run the frontend and backend will be added here.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 
-## API Documentation
+## Quick Start
 
-API documentation will be added here.
+1. Install dependencies:
+   ```bash
+   cd recipe_app/frontend
+   npm install
+   ```
 
-## Environment Variables
+2. Start the frontend:
+   ```bash
+   npm run dev
+   ```
 
-Environment variables needed for the project will be documented here.
+3. In a separate terminal, start the backend:
+   ```bash
+   cd recipe_app/backend
+   pip install -r requirements.txt
+   uvicorn main:app --reload
+   ```
