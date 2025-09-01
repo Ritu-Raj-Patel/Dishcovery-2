@@ -12,18 +12,74 @@ A smart recipe recommendation system that uses AI to extract ingredients from im
 
 ## Tech Stack
 
-- Frontend: Next.js with TypeScript and Tailwind CSS
+- Frontend: React/Vite with TypeScript and Tailwind CSS
 - Backend: FastAPI with Python
 - AI: Google Gemini for ingredient recognition
 
-## Getting Started
+## Local Development Setup
 
-Instructions to run the frontend and backend will be added here.
+### Prerequisites
+- Python 3.8+
+- Node.js 16+
+- npm
 
-## API Documentation
+### Quick Start (Recommended)
 
-API documentation will be added here.
+1. Run the setup script:
+   ```bash
+   ./setup-local.sh
+   ```
+
+2. Start the application:
+   ```bash
+   ./start-local.sh
+   ```
+
+3. Open your browser to http://localhost:3000
+
+### Manual Setup
+
+1. Install backend dependencies:
+   ```bash
+   cd recipe_app
+   python3 -m venv backend/venv
+   source backend/venv/bin/activate
+   pip install -r backend/requirements.txt
+   ```
+
+2. Install frontend dependencies:
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+3. Start the backend server (in one terminal):
+   ```bash
+   cd recipe_app
+   source backend/venv/bin/activate
+   python backend/main.py
+   ```
+
+4. Start the frontend development server (in another terminal):
+   ```bash
+   cd recipe_app/frontend
+   npm run dev
+   ```
+
+5. Open your browser to http://localhost:3000
+
+## API Endpoints
+
+- Health check: http://localhost:8001/health
+- Recipe search: http://localhost:8001/recipes/search
 
 ## Environment Variables
 
-Environment variables needed for the project will be documented here.
+Create a `.env` file in the `recipe_app/backend` directory with:
+```
+SPOONACULAR_API_KEY=your_api_key_here
+```
+
+## Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
