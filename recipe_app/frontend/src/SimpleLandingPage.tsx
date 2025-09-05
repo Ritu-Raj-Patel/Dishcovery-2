@@ -805,7 +805,6 @@ const SimpleLandingPage: React.FC = () => {
             justifyContent: 'center', 
             flexWrap: 'wrap', 
             gap: '8px',
-            margin: '15px 0',
             maxWidth: '500px',
             margin: '15px auto',
             position: 'relative',
@@ -849,12 +848,11 @@ const SimpleLandingPage: React.FC = () => {
         {error && (
           <div style={{ 
             color: 'red', 
-            margin: '10px 0',
+            margin: '10px auto',
             padding: '8px',
             backgroundColor: '#ffebee',
             borderRadius: '4px',
             maxWidth: '500px',
-            margin: '10px auto',
             fontSize: '14px',
             position: 'relative',
             left: '-20px'
